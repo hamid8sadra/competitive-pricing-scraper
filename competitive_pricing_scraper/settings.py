@@ -93,8 +93,16 @@ FEED_EXPORT_ENCODING = "utf-8"
 
 # New Added
 # competitive_pricing_scraper/settings.py
+ITEM_PIPELINES = {
+    'competitive_pricing_scraper.pipelines.PostgresPipeline': 300,
+}
+DB_NAME = 'pricing_db'
+DB_USER = 'postgres'
+DB_PASSWORD = '1234'
+DB_HOST = 'localhost'
+DB_PORT = '5432'
 DOWNLOADER_MIDDLEWARES = {
-    # 'competitive_pricing_scraper.middlewares.ProxyMiddleware': 543,  # Uncomment to enable proxies
+    # 'competitive_pricing_scraper.middlewares.ProxyMiddleware': 543,
     'competitive_pricing_scraper.middlewares.CustomRetryMiddleware': 550,
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
 }
