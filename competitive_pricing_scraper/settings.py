@@ -92,7 +92,19 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 # New Added
-# competitive_pricing_scraper/competitive_pricing_scraper/settings.py
+# competitive_pricing_scraper/settings.py
+DOWNLOADER_MIDDLEWARES = {
+    # 'competitive_pricing_scraper.middlewares.ProxyMiddleware': 543,  # Uncomment to enable proxies
+    'competitive_pricing_scraper.middlewares.CustomRetryMiddleware': 550,
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+}
+RETRY_TIMES = 5
+RETRY_HTTP_CODES = [403, 429, 503]
+AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_START_DELAY = 5.0
+AUTOTHROTTLE_MAX_DELAY = 60.0
+AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+DOWNLOAD_DELAY = 2.0
+CONCURRENT_REQUESTS_PER_DOMAIN = 2
 LOG_LEVEL = 'INFO'
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-
